@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.4...v0.1.5) (2025-07-07)
+
+
+### Bug Fixes
+
+* major changes in prismic setup ([27db657](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/27db65775717d2247463484a50a3b6ded8bd3156))
+
 ### [0.1.4](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.3...v0.1.4) (2025-07-07)
 
 
