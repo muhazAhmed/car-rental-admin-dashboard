@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model Car {
@@ -12,8 +12,8 @@ model Car {
   make        String
   model       String
   year        Int
-  pricePerDay Float
-  isAvailable Boolean  @default(true)
+  pricePerDay Int
+  isAvailable Boolean
   imageUrl    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt

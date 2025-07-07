@@ -7,7 +7,7 @@
     "build": "next build",
     "release": "standard-version",
     "start": "next start",
-    "prisma:seed": "ts-node prisma/seed.ts",
+    "prisma:seed": "node prisma/seed.mjs",
     "lint": "next lint"
   },
   "dependencies": {

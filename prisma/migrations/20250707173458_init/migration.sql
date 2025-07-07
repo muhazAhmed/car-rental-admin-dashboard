@@ -4,8 +4,8 @@ CREATE TABLE "Car" (
     "make" TEXT NOT NULL,
     "model" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
-    "pricePerDay" REAL NOT NULL,
-    "isAvailable" BOOLEAN NOT NULL DEFAULT true,
+    "pricePerDay" INTEGER NOT NULL,
+    "isAvailable" BOOLEAN NOT NULL,
     "imageUrl" TEXT NOT NULL,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
