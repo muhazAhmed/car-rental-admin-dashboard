@@ -3,11 +3,18 @@ import { endpoints } from "@/lib/endpoints";
 import { CustomAxios } from "@/lib/utils";
 import { Car } from "@/types/props";
 import React from "react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function getCars(): Promise<Car[]> {
   return CustomAxios<Car[]>(endpoints.cars);
 }
 export default async function CarsPage() {
+  const token = (await cookies()).get("auth");
+
+  if (!token?.value) {
+    redirect("/login");
+  }
   const cars = await getCars();
 
   return (

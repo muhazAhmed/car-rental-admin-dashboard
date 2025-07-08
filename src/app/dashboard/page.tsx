@@ -4,6 +4,8 @@ import Pagination from "@/components/ui/Pagination";
 import { endpoints } from "@/lib/endpoints";
 import { CustomAxios } from "@/lib/utils";
 import { Car, SummaryDataProps } from "@/types/props";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 async function getSummary(): Promise<SummaryDataProps> {
   return CustomAxios<SummaryDataProps>(endpoints.summary);
@@ -21,6 +23,12 @@ export default async function DashboardPage({
 }: {
   searchParams: { page?: string };
 }) {
+  const token = (await cookies()).get("auth");
+
+  if (!token?.value) {
+    redirect("/login");
+  }
+
   const page = parseInt(searchParams.page || "1");
   const limit = 5;
 
