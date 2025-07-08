@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.5...v0.1.6) (2025-07-08)
+
+
+### Features
+
+* added cars card components ([d4f03c6](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/d4f03c6d53f1e96ab9ebc684ae492ec1369dd3ca))
+* added sidebar ([9d86c69](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/9d86c6956d570c72f9cffe130140bf109fc3cf8b))
+* added summary ([d94ca74](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/d94ca74de2683167b1e7a598ca7238fa7b7bcab6))
+* Added summary cards ([055ca27](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/055ca27f135783590ee9bb0d37d5391137c62cc8))
+
+
+### Bug Fixes
+
+* removed letter spacings ([582dced](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/582dcedabb49519528b98e56a5f38f9d8702351d))
+
 ### [0.1.5](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.4...v0.1.5) (2025-07-07)
 
 
