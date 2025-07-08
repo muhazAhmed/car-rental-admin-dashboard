@@ -18,3 +18,10 @@ export async function CustomAxios<T>(endpoint: string): Promise<T> {
     throw error;
   }
 }
+
+export const formatDate = (date: Date) =>
+  new Date(date).toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
