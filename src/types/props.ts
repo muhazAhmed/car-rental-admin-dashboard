@@ -7,3 +7,10 @@ export interface Car {
     isAvailable: boolean;
     imageUrl: string;
 }
+
+export interface SummaryDataProps {
+    totalRevenue: string;
+    availableCars: number;
+    activeUsers: number;
+    totalCars: number;
+}
