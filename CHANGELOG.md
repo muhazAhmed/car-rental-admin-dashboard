@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.7...v0.1.8) (2025-07-08)
+
+
+### Features
+
+* added logout functionality ([82876d7](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/82876d7c7397ac59060715800b9d7fa31a76421a))
+* added toast feature ([bb96ed6](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/bb96ed6c28935a1b94bf94e023e95cfa512c2ff2))
+
 ### [0.1.7](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.6...v0.1.7) (2025-07-08)
 
 
