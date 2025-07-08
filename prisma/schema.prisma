@@ -15,6 +15,13 @@ model Car {
   pricePerDay Int
   isAvailable Boolean
   imageUrl    String
+  status      Status   @default(PENDING)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+enum Status {
+  PENDING
+  APPROVED
+  REJECTED
 }

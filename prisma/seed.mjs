@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import { Status } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -13,6 +14,7 @@ async function main() {
         pricePerDay: 50,
         isAvailable: true,
         imageUrl: "/cars/camry.png",
+        status: Status.PENDING,
       },
       {
         make: "Honda",
@@ -21,6 +23,7 @@ async function main() {
         pricePerDay: 45,
         isAvailable: false,
         imageUrl: "/cars/civic.png",
+        status: Status.APPROVED,
       },
       {
         make: "Tesla",
@@ -29,6 +32,7 @@ async function main() {
         pricePerDay: 120,
         isAvailable: true,
         imageUrl: "/cars/model3.png",
+        status: Status.REJECTED,
       },
       {
         make: "Tata",
@@ -37,6 +41,7 @@ async function main() {
         pricePerDay: 500,
         isAvailable: true,
         imageUrl: "/cars/model3.png",
+        status: Status.PENDING,
       },
     ],
   });

@@ -9,8 +9,8 @@ export interface Car {
 }
 
 export interface SummaryDataProps {
-    totalRevenue: string;
-    availableCars: number;
-    activeUsers: number;
-    totalCars: number;
+    totalListings: number;
+    pendingListings: number;
+    approvedListings: number;
+    rejectedListings: number;
 }

@@ -5,11 +5,13 @@ import { motion } from "framer-motion";
 import { SummaryDataProps } from "@/types/props";
 
 const SummaryCard = ({ data }: { data: SummaryDataProps }) => {
+  const { totalListings, pendingListings, approvedListings, rejectedListings } =
+    data;
   const cards = [
-    { label: "Total Revenue", value: data?.totalRevenue ?? "—" },
-    { label: "Available Cars", value: data?.availableCars ?? "—" },
-    { label: "Active Users", value: data?.activeUsers ?? "—" },
-    { label: "Total Cars", value: data?.totalCars ?? "—" },
+    { label: "Total Listings", value: totalListings ?? "—" },
+    { label: "Pending", value: pendingListings ?? "—" },
+    { label: "Approved", value: approvedListings ?? "—" },
+    { label: "Rejected", value: rejectedListings ?? "—" },
   ];
 
   return (
