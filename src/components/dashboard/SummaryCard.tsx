@@ -1,31 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { SummaryDataProps } from "@/types/props";
 
-const SummaryCard = () => {
-  const [data, setData] = useState<SummaryDataProps | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const getDashboardSummary = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/summary", { cache: "no-store" });
-        if (!res.ok) throw new Error("Failed to fetch summary");
-        const summary = await res.json();
-        setData(summary);
-      } catch (error) {
-        console.error("Dashboard summary fetch failed:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getDashboardSummary();
-  }, []);
-
+const SummaryCard = ({ data }: { data: SummaryDataProps }) => {
   const cards = [
     { label: "Total Revenue", value: data?.totalRevenue ?? "—" },
     { label: "Available Cars", value: data?.availableCars ?? "—" },
@@ -42,9 +21,7 @@ const SummaryCard = () => {
           key={index}
           className="flex flex-col gap-1 p-4 min-h-[90px] bg-[#F2F6FB] rounded-2xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow cursor-pointer"
         >
-          <h2 className="text-xl font-semibold text-gray-900">
-            {loading ? "Loading..." : item.value}
-          </h2>
+          <h2 className="text-xl font-semibold text-gray-900">{item.value}</h2>
           <p className="text-[13px] text-gray-500">{item.label}</p>
         </motion.div>
       ))}
