@@ -11,6 +11,7 @@ export function cn(...inputs: ClassValue[]) {
 export async function CustomAxios<T>(endpoint: string): Promise<T> {
   try {
     const url = `${baseURL}${endpoint}`;
+    console.log(url)
     const response = await axios.get<T>(url, { headers: { "Cache-Control": "no-store" } });
     return response.data;
   } catch (error) {
