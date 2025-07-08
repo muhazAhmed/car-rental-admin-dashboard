@@ -2,6 +2,7 @@ import ListingTable from "@/components/dashboard/ListingTable";
 import SummaryCard from "@/components/dashboard/SummaryCard";
 import Pagination from "@/components/ui/Pagination";
 import { endpoints } from "@/lib/endpoints";
+import { UseToast } from "@/lib/helperComponents";
 import { CustomAxios } from "@/lib/utils";
 import { Car, SummaryDataProps } from "@/types/props";
 import { cookies } from "next/headers";
@@ -26,6 +27,7 @@ export default async function DashboardPage({
   const token = (await cookies()).get("auth");
 
   if (!token?.value) {
+    UseToast("Error", "Please login first", "error");
     redirect("/login");
   }
 

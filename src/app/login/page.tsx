@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import PasswordInput from "@/components/ui/PasswordInput";
 import CustomButton from "@/components/ui/CustomButton";
 import { Lock } from "lucide-react";
+import { UseToast } from "@/lib/helperComponents";
 
 const MotionCustomButton = motion(CustomButton);
 
@@ -41,6 +42,7 @@ export default function LoginPage() {
     if (username === "admin" && password === "admin123") {
       Cookies.set("auth", "true", { expires: 1 });
       router.push("/dashboard");
+      UseToast("Success", "Logged in successfully", "success", 3000);
     } else {
       setErrors({ general: "Invalid credentials" });
       setIsLoading(false);

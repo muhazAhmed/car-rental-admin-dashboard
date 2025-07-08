@@ -2,21 +2,12 @@
 
 import { ReactNode, useState } from "react";
 import { Input } from "@/components/ui/input";
-import {
-  Bell,
-  Car,
-  DoorClosed,
-  Home,
-  Menu,
-  Search,
-  User2,
-  Users,
-  X,
-} from "lucide-react";
+import { Bell, Car, Home, Menu, Search, User2, Users, X } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -75,14 +66,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </NavItem>
         </nav>
 
-        <Button
-          variant="destructive"
-          className="w-[90%] mt-auto"
-          onClick={() => alert("Logout not implemented")}
-        >
-          <DoorClosed size={20} className="mr-2" />
-          Logout
-        </Button>
+        <LogoutButton />
       </aside>
 
       <div className="flex-1 flex flex-col">

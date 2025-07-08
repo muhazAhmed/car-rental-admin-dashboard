@@ -1,3 +1,7 @@
+"use client";
+
+import { toast } from "sonner";
+
 export const statusBodyTemplate = (status: string) => {
   const statusColorMap: Record<string, string> = {
     PENDING: "bg-yellow-100",
@@ -14,4 +18,16 @@ export const statusBodyTemplate = (status: string) => {
       {status}
     </span>
   );
+};
+
+export const UseToast = (
+  title: string,
+  message: string,
+  type: "success" | "error" | "warning" | "info",
+  duration?: number
+) => {
+  toast[type](title, {
+    description: message,
+    duration: duration || 3000,
+  });
 };

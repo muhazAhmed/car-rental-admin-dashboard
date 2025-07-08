@@ -5,6 +5,7 @@ import { Car } from "@/types/props";
 import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { UseToast } from "@/lib/helperComponents";
 
 async function getCars(): Promise<Car[]> {
   return CustomAxios<Car[]>(endpoints.cars);
@@ -13,6 +14,7 @@ export default async function CarsPage() {
   const token = (await cookies()).get("auth");
 
   if (!token?.value) {
+    UseToast("Error", "Please login first", "error");
     redirect("/login");
   }
   const cars = await getCars();
