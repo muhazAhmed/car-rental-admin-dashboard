@@ -1,4 +1,5 @@
 import { endpoints } from "@/lib/endpoints";
+import { UseToast } from "@/lib/helperComponents";
 import { CustomAxios } from "@/lib/utils";
 import { Car } from "@prisma/client";
 import { z } from "zod";
@@ -34,3 +35,13 @@ export const EditCarSchema = z.object({
     isAvailable: z.coerce.boolean(),
     status: z.enum(["PENDING", "APPROVED", "REJECTED"]),
 });
+
+export const deleteCarData = async (id: string, setModal: React.Dispatch<React.SetStateAction<string>>) => {
+    try {
+        await CustomAxios(endpoints.carById + id, "DELETE");
+        setModal("");
+        UseToast("Success", "Deleted successfully", "success");
+    } catch (error) {
+        console.error("Error deleting car:", error);
+    }
+}

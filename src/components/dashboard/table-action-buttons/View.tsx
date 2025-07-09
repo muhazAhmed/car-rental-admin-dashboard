@@ -10,14 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import Image from "next/image";
 import { statusBodyTemplate } from "@/lib/helperComponents";
+import { ModalProps } from "@/types/props";
 
-interface ViewProps {
-  modal: string;
-  setModal: React.Dispatch<React.SetStateAction<string>>;
-  data: any;
-}
-
-const View = ({ modal, setModal, data }: ViewProps) => {
+const View = ({ modal, setModal, data }: ModalProps) => {
   if (!data) return null;
 
   return (

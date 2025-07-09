@@ -5,10 +5,9 @@ import { Car } from "@/types/props";
 import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { UseToast } from "@/lib/helperComponents";
 
-async function getCars(): Promise<Car[]> {
-  return CustomAxios<Car[]>(endpoints.cars);
+async function getCars(): Promise<{ data: Car[]; totalCount: number }> {
+  return CustomAxios<{ data: Car[]; totalCount: number }>(endpoints.cars);
 }
 export default async function CarsPage() {
   const token = (await cookies()).get("auth");

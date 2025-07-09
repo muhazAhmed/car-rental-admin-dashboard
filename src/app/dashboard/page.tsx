@@ -2,7 +2,6 @@ import ListingTable from "@/components/dashboard/ListingTable";
 import SummaryCard from "@/components/dashboard/SummaryCard";
 import Pagination from "@/components/ui/Pagination";
 import { endpoints } from "@/lib/endpoints";
-import { UseToast } from "@/lib/helperComponents";
 import { CustomAxios } from "@/lib/utils";
 import { Car, SummaryDataProps } from "@/types/props";
 import { cookies } from "next/headers";
@@ -22,7 +21,7 @@ async function getPaginatedCars(page: number, limit: number) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: { page?: string };
+  searchParams: Promise<{ page?: string }>;
 }) {
   const token = (await cookies()).get("auth");
 
@@ -30,17 +29,19 @@ export default async function DashboardPage({
     redirect("/login?error=unauthenticated");
   }
 
-  const page = parseInt(searchParams.page || "1");
+  const { page: pageParam } = await searchParams;
+  const page: number = parseInt(pageParam ?? "1");
+  const pageNumber = parseInt(pageParam || "1");
   const limit = 5;
 
-  const { data: cars, totalCount } = await getPaginatedCars(page, limit);
+  const { data: cars, totalCount } = await getPaginatedCars(pageNumber, limit);
   const summary = await getSummary();
 
   return (
     <>
       <SummaryCard data={summary} />
       <ListingTable cars={cars} />
-      <Pagination currentPage={page} totalCount={totalCount} limit={limit} />
+      <Pagination currentPage={pageNumber} totalCount={totalCount} limit={limit} />
     </>
   );
 }
