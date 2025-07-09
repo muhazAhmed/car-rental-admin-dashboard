@@ -1,36 +1,159 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 Car Rental Admin Dashboard
 
-## Getting Started
+A modern and clean **Admin Dashboard** to manage a car rental system — built with **Next.js 15 App Router**, **Tailwind CSS**, **Prisma**, and **ShadCN UI**.  
+The project is fully modular, type-safe, and production ready.
 
-First, run the development server:
+> ✅ Admin login | 🔄 CRUD for cars | 📦 Modern UI | 🧪 Validations | 🔐 Local auth
+
+---
+
+## ⚙️ Tech Stack
+
+| Layer        | Tech Used                                    |
+|--------------|-----------------------------------------------|
+| Framework    | Next.js 15 (App Router)                      |
+| Styling      | Tailwind CSS, ShadCN UI                      |
+| Animations   | Framer Motion                                |
+| ORM          | Prisma (with SQLite locally)                 |
+| Validation   | Zod                                          |
+| Icons        | Lucide React                                 |
+| Toasts       | Sonner / Custom Toast handler                |
+| Routing      | Next.js API Routes with App Router structure |
+
+---
+
+## ✨ Features
+
+- 🔐 **Admin Login** with cookie-based auth (local)
+- 📋 **Car Listing Table**:
+  - View, Edit, Delete
+  - Tooltips, status badges, ID copy, confirmation modals
+- 🛠️ **CRUD Support**
+  - Server-side routes with Prisma
+  - Zod schema validation on updates
+- 🌐 **Responsive UI** with modern glassmorphism effect
+- 📊 **Dashboard Cards**
+  - Total cars, available/unavailable counts, pending approvals
+- ✅ **Type-safe props and APIs**
+- 🧪 **Fully structured for production builds**
+
+---
+
+## 📁 Folder Structure
+
+```
+car-rental-admin-dashboard/
+├── src/
+│   ├── app/                  # App routes (Next.js App Router)
+│   ├── components/           # UI components
+│   ├── lib/                  # Prisma, helpers, utils
+│   ├── types/                # TypeScript interfaces
+│   └── styles/               # Global styles if any
+├── prisma/
+│   ├── schema.prisma         # Prisma DB schema
+│   ├── seed.ts               # Seeding logic
+│   └── dev.db                # Local SQLite database
+├── public/
+└── README.md
+```
+
+---
+
+## 🛠️ Local Setup Instructions
+
+### 1. Clone the Repo
+
+```bash
+git clone https://github.com/your-username/car-rental-admin-dashboard.git
+cd car-rental-admin-dashboard
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Set Up Environment
+
+Create a `.env` file in the root:
+
+```env
+DATABASE_URL="file:./dev.db"
+NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+```
+
+### 4. Setup Local Database (SQLite)
+
+Run the following commands in order:
+
+```bash
+rm -rf prisma/migrations
+rm prisma/dev.db
+npx prisma migrate dev --name init
+npx prisma generate
+npm run prisma:seed
+```
+
+> ✅ This resets and seeds your local database.
+
+### 5. Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Usage Credentials
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Username:** `admin`  
+- **Password:** `admin123`  
 
-## Learn More
+> 🔐 Auth is cookie-based. You can enhance this later with JWT/Auth.js.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧱 Key Components & Files
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Path                                  | Purpose                          |
+|---------------------------------------|----------------------------------|
+| `/app/login/page.tsx`                 | Admin login form                 |
+| `/app/dashboard/page.tsx`             | Dashboard overview               |
+| `/app/cars/page.tsx`                  | Car listing page                 |
+| `/app/api/cars/route.ts`              | Create & list cars (POST, GET)   |
+| `/app/api/cars/[id]/route.ts`         | Get, Update, Delete car by ID    |
+| `/components/dashboard/ListingTable`  | Car table with action buttons    |
+| `/components/ui/*`                    | Reusable input, button, dialog   |
+| `/lib/prisma.ts`                      | Prisma client setup              |
+| `/lib/helperComponents.tsx`           | Toast and status utils           |
+| `/types/props.ts`                     | Component prop types             |
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚧 Future Enhancements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Role-based user system
+- Pagination & filtering on listings
+- Upload car images (Cloudinary/S3)
+- Global dark mode toggle
+- Export data to CSV
+- Multi-language support
+
+---
+
+## 🙋‍♂️ Author
+
+**Muhaz Ahmed**  
+Frontend Engineer | MERN Stack Developer  
+🔗 [LinkedIn](https://linkedin.com/in/muhazahmed) •
+
+---
+
+## 📜 License
+
+MIT — Free to use, modify, and distribute.
+
+> Built with ❤️ using Next.js, Prisma, and a little frustration 😅
