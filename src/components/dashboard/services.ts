@@ -1,6 +1,7 @@
 import { endpoints } from "@/lib/endpoints";
 import { CustomAxios } from "@/lib/utils";
 import { Car } from "@prisma/client";
+import { z } from "zod";
 
 interface FetchCarDetailsProps {
     id: string;
@@ -23,3 +24,13 @@ export const fetchCarDetails = async ({ id, setModal, modalName, setLoading, set
         setLoading(false);
     }
 }
+
+export const EditCarSchema = z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.coerce.number().min(1900).max(new Date().getFullYear()),
+    pricePerDay: z.coerce.number().min(0),
+    imageUrl: z.string().url().min(1),
+    isAvailable: z.coerce.boolean(),
+    status: z.enum(["PENDING", "APPROVED", "REJECTED"]),
+});

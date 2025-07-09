@@ -14,8 +14,7 @@ export default async function CarsPage() {
   const token = (await cookies()).get("auth");
 
   if (!token?.value) {
-    UseToast("Error", "Please login first", "error");
-    redirect("/login");
+    redirect("/login?error=unauthenticated");
   }
   const cars = await getCars();
 

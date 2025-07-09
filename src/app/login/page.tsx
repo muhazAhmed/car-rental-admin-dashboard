@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ import { UseToast } from "@/lib/helperComponents";
 const MotionCustomButton = motion(CustomButton);
 
 export default function LoginPage() {
+  const searchParams = useSearchParams();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -48,6 +49,13 @@ export default function LoginPage() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (error === "unauthenticated") {
+      UseToast("Error", "Please login to continue", "error");
+    }
+  }, [searchParams]);
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -86,7 +94,7 @@ export default function LoginPage() {
                   name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder="admin123"
                   autoComplete="current-password"
                   className="placeholder:text-gray-300"
                 />

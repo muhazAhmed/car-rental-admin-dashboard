@@ -88,10 +88,12 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
                       />
                     </CustomTooltip>
                     <CustomTooltip content="Edit" className="bg-blue-500">
-                      <Pencil
-                        size={18}
-                        className="text-blue-500 cursor-pointer"
-                      />
+                      <a href={`/edit/${item.id}`}>
+                        <Pencil
+                          size={18}
+                          className="text-blue-500 cursor-pointer"
+                        />
+                      </a>
                     </CustomTooltip>
                     <CustomTooltip content="Delete" className="bg-red-500">
                       <Trash

@@ -1,5 +1,16 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { z } from "zod";
+
+const CarUpdateSchema = z.object({
+    make: z.string().min(1),
+    model: z.string().min(1),
+    year: z.coerce.number().min(1900).max(new Date().getFullYear()),
+    pricePerDay: z.coerce.number().min(0),
+    imageUrl: z.string().url().min(1),
+    isAvailable: z.boolean(),
+    status: z.enum(["APPROVED", "PENDING", "REJECTED"]),
+});
 
 export async function GET(
     req: Request,
@@ -21,3 +32,32 @@ export async function GET(
     }
 }
 
+export async function PUT(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const body = await req.json();
+        const parsed = CarUpdateSchema.safeParse(body);
+
+        if (!parsed.success) {
+            return NextResponse.json(
+                { error: "Invalid input", issues: parsed.error.flatten() },
+                { status: 400 }
+            );
+        }
+
+        const updatedCar = await prisma.car.update({
+            where: { id: params.id },
+            data: parsed.data,
+        });
+
+        return NextResponse.json(updatedCar);
+    } catch (error) {
+        console.error("Error updating car:", error);
+        return NextResponse.json(
+            { error: "Failed to update car" },
+            { status: 500 }
+        );
+    }
+}

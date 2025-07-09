@@ -8,14 +8,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export async function CustomAxios<T>(endpoint: string): Promise<T> {
+type Method = "GET" | "POST" | "PUT" | "DELETE";
+
+export async function CustomAxios<T>(
+  endpoint: string,
+  method: Method = "GET",
+  data: any = null
+): Promise<T> {
   try {
     const url = `${baseURL}${endpoint}`;
-    console.log(url)
-    const response = await axios.get<T>(url, { headers: { "Cache-Control": "no-store" } });
+    const config = {
+      method,
+      url,
+      headers: { "Cache-Control": "no-store" },
+      ...(data && { data }),
+    };
+
+    const response = await axios.request<T>(config);
     return response.data;
   } catch (error) {
-    console.error(`❌ Error fetching from ${endpoint}:`, error);
+    console.error(`❌ Error during ${method} request to ${endpoint}:`, error);
     throw error;
   }
 }
