@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.10](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.8...v0.1.10) (2025-07-09)
+
+
+### Features
+
+* added delete feature ([39a247f](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/39a247f705b71867a7a28e86d8a7b60edb8cf191))
+
+
+### Bug Fixes
+
+* some major bugs ([1e311a7](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/1e311a7b1d363ad8ce59e222640d2b4bc3f81ee3))
+
 ### [0.1.8](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.7...v0.1.8) (2025-07-08)
 
 
