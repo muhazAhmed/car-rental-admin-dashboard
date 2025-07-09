@@ -14,11 +14,12 @@ const CarUpdateSchema = z.object({
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await context.params;
         const car = await prisma.car.findUnique({
-            where: { id: params.id },
+            where: { id },
         });
 
         if (!car) {
@@ -34,9 +35,10 @@ export async function GET(
 
 export async function PUT(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await context.params;
         const body = await req.json();
         const parsed = CarUpdateSchema.safeParse(body);
 
@@ -48,7 +50,7 @@ export async function PUT(
         }
 
         const updatedCar = await prisma.car.update({
-            where: { id: params.id },
+            where: { id },
             data: parsed.data,
         });
 
@@ -59,5 +61,29 @@ export async function PUT(
             { error: "Failed to update car" },
             { status: 500 }
         );
+    }
+}
+
+export async function DELETE(
+    req: NextRequest,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const car = await prisma.car.findUnique({
+            where: { id: params.id },
+        });
+
+        if (!car) {
+            return NextResponse.json({ error: "Car not found" }, { status: 404 });
+        }
+
+        await prisma.car.delete({
+            where: { id: params.id },
+        });
+
+        return NextResponse.json({ message: "Car deleted successfully" }, { status: 200 });
+    } catch (error) {
+        console.error("Error deleting car:", error);
+        return NextResponse.json({ error: "Failed to delete car" }, { status: 500 });
     }
 }

@@ -19,3 +19,16 @@ export interface SummaryDataProps {
     approvedListings: number;
     rejectedListings: number;
 }
+
+export interface CarCardProps {
+    car: Car;
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+    setModal: React.Dispatch<React.SetStateAction<string>>;
+    setData: React.Dispatch<React.SetStateAction<any>>;
+}
+
+export interface ModalProps {
+    modal: string;
+    setModal: React.Dispatch<React.SetStateAction<string>>;
+    data: any;
+}

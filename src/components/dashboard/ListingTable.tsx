@@ -19,6 +19,7 @@ import Loader from "../ui/Loader";
 import View from "./table-action-buttons/View";
 import { statusBodyTemplate } from "@/lib/helperComponents";
 import CopyToClipboard from "../ui/CopyToClipboard";
+import Delete from "./table-action-buttons/Delete";
 
 export default function ListingTable({ cars }: { cars: Car[] }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -99,6 +100,15 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
                       <Trash
                         size={18}
                         className="text-red-500 cursor-pointer"
+                        onClick={() =>
+                          fetchCarDetails({
+                            id: item.id,
+                            setModal,
+                            modalName: "delete",
+                            setLoading,
+                            setData,
+                          })
+                        }
                       />
                     </CustomTooltip>
                   </TableCell>
@@ -122,5 +132,6 @@ const renderModal = (modalName: string, setModal: any, data: any) => {
   if (modalName === "view")
     return <View modal={modalName} setModal={setModal} data={data} />;
   if (modalName === "edit") return;
-  if (modalName === "delete") return;
+  if (modalName === "delete")
+    return <Delete modal={modalName} setModal={setModal} data={data} />;
 };

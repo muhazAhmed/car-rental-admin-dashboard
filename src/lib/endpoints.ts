@@ -1,5 +1,5 @@
 export const endpoints = {
-    cars: "/cars", //To fetch all cars list
-    summary: "/summary",
-    carById: "api/cars/", //To fetch single car
+    cars: "/api/cars", //To fetch all cars list
+    summary: "/api/summary",
+    carById: "/api/cars/", //To fetch single car
 };
