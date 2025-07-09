@@ -30,7 +30,6 @@ export default async function DashboardPage({
   }
 
   const { page: pageParam } = await searchParams;
-  const page: number = parseInt(pageParam ?? "1");
   const pageNumber = parseInt(pageParam || "1");
   const limit = 5;
 
@@ -41,7 +40,11 @@ export default async function DashboardPage({
     <>
       <SummaryCard data={summary} />
       <ListingTable cars={cars} />
-      <Pagination currentPage={pageNumber} totalCount={totalCount} limit={limit} />
+      <Pagination
+        currentPage={pageNumber}
+        totalCount={totalCount}
+        limit={limit}
+      />
     </>
   );
 }

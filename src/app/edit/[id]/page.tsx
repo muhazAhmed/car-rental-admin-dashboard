@@ -6,16 +6,18 @@ import { cookies } from "next/headers";
 import Edit from "@/components/dashboard/table-action-buttons/Edit";
 
 interface Props {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditCarPage({ params }: Props) {
-  const cookieStore = cookies();
   const token = (await cookies()).get("auth");
 
-  if (!token?.value) redirect("/login");
+  if (!token?.value) {
+    redirect("/login?error=unauthenticated");
+  }
 
-  const id = params.id;
+  if (!token?.value) redirect("/login");
+  const { id } = await params;
 
   try {
     const car = await CustomAxios<Car>(`${endpoints.carById}${id}`);
