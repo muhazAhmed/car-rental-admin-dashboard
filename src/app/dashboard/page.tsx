@@ -11,9 +11,14 @@ async function getSummary(): Promise<SummaryDataProps> {
   return CustomAxios<SummaryDataProps>(endpoints.summary);
 }
 
-async function getPaginatedCars(page: number, limit: number, search: string) {
+async function getPaginatedCars(
+  page: number,
+  limit: number,
+  search: string,
+  status?: string
+) {
   const response = await CustomAxios<{ data: Car[]; totalCount: number }>(
-    `${endpoints.cars}?page=${page}&limit=${limit}&search=${search}`
+    `${endpoints.cars}?page=${page}&limit=${limit}&search=${search}&status=${status}`
   );
   return response;
 }
@@ -21,7 +26,7 @@ async function getPaginatedCars(page: number, limit: number, search: string) {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; search?: string }>;
+  searchParams: Promise<{ page?: string; search?: string; status?: string }>;
 }) {
   const token = (await cookies()).get("auth");
 
@@ -29,14 +34,15 @@ export default async function DashboardPage({
     redirect("/login?error=unauthenticated");
   }
 
-  const { page: pageParam, search = "" } = await searchParams;
+  const { page: pageParam, search = "", status } = await searchParams;
   const pageNumber = parseInt(pageParam || "1");
   const limit = 5;
 
   const { data: cars, totalCount } = await getPaginatedCars(
     pageNumber,
     limit,
-    search
+    search,
+    status
   );
   const summary = await getSummary();
 

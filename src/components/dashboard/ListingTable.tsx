@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowDown01, Filter } from "lucide-react";
+import { ArrowDown01 } from "lucide-react";
 import CustomTooltip from "../ui/CustomTooltip";
 import { formatDate, SortData } from "@/lib/utils";
 import { useState } from "react";
@@ -21,6 +21,8 @@ import { statusBodyTemplate } from "@/lib/helperComponents";
 import CopyToClipboard from "../ui/CopyToClipboard";
 import Delete from "./table-action-buttons/Delete";
 import { SortKey } from "@/types/props";
+import FilterStatus from "./table-action-buttons/FilterStatus";
+import { useSearchParams } from "next/navigation";
 
 export default function ListingTable({ cars }: { cars: Car[] }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,6 +30,8 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
   const [data, setData] = useState<Car | null>(null);
   const [sortKey, setSortKey] = useState<SortKey | null>(null);
   const [sortAsc, setSortAsc] = useState(true);
+  const searchParams = useSearchParams();
+  const statusFilter = searchParams.get("status") || "ALL";
 
   const handleSort = (key: SortKey) => () => {
     if (sortKey === key) setSortAsc((prev) => !prev);
@@ -49,7 +53,7 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
         <div className="flex w-full items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-primary">Listings</h2>
           <CustomTooltip content="Filter">
-            <Filter size={15} className="cursor-pointer" />
+            <FilterStatus value={statusFilter} />
           </CustomTooltip>
         </div>
 

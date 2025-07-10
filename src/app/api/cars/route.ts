@@ -7,17 +7,21 @@ export async function GET(req: NextRequest) {
         const page = parseInt(searchParams.get("page") || "1");
         const limit = parseInt(searchParams.get("limit") || "5");
         const search = searchParams.get("search") || "";
+        const rawStatus = searchParams.get("status");
+        const status = rawStatus && rawStatus !== "undefined" ? rawStatus : undefined;
 
         const skip = (page - 1) * limit;
 
-        const searchFilter = search
-            ? {
+        const searchFilter: any = {
+            ...(search && {
                 OR: [
                     { make: { contains: search } },
                     { model: { contains: search } },
+                    { year: { equals: parseInt(search) } },
                 ],
-            }
-            : {};
+            }),
+            ...(status && status !== "ALL" && { status }),
+        };
 
         const [cars, totalCount] = await Promise.all([
             prisma.car.findMany({
