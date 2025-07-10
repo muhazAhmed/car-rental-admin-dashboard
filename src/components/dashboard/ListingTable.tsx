@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ArrowDown, ArrowDown01, Filter } from "lucide-react";
+import { ArrowDown01, Filter } from "lucide-react";
 import CustomTooltip from "../ui/CustomTooltip";
 import { formatDate, SortData } from "@/lib/utils";
 import { useState } from "react";
@@ -109,6 +109,7 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
                       setModal,
                       setLoading,
                       setData,
+                      status: item.status,
                     }).map(
                       ({
                         label,

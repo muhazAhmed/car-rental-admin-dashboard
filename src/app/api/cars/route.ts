@@ -6,12 +6,29 @@ export async function GET(req: NextRequest) {
         const { searchParams } = new URL(req.url);
         const page = parseInt(searchParams.get("page") || "1");
         const limit = parseInt(searchParams.get("limit") || "5");
+        const search = searchParams.get("search") || "";
 
         const skip = (page - 1) * limit;
 
+        const searchFilter = search
+            ? {
+                OR: [
+                    { make: { contains: search } },
+                    { model: { contains: search } },
+                ],
+            }
+            : {};
+
         const [cars, totalCount] = await Promise.all([
-            prisma.car.findMany({ skip, take: limit }),
-            prisma.car.count(),
+            prisma.car.findMany({
+                where: searchFilter,
+                skip,
+                take: limit,
+                orderBy: {
+                    createdAt: "desc",
+                },
+            }),
+            prisma.car.count({ where: searchFilter }),
         ]);
 
         return NextResponse.json({ data: cars, totalCount });

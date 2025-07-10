@@ -3,13 +3,13 @@ import { prisma } from "@/lib/prisma";
 import { z } from "zod";
 
 const CarUpdateSchema = z.object({
-    make: z.string().min(1),
-    model: z.string().min(1),
-    year: z.coerce.number().min(1900).max(new Date().getFullYear()),
-    pricePerDay: z.coerce.number().min(0),
-    imageUrl: z.string().url().min(1),
-    isAvailable: z.boolean(),
-    status: z.enum(["APPROVED", "PENDING", "REJECTED"]),
+    make: z.string().min(1).optional(),
+    model: z.string().min(1).optional(),
+    year: z.coerce.number().min(1900).max(new Date().getFullYear()).optional(),
+    pricePerDay: z.coerce.number().min(0).optional(),
+    imageUrl: z.string().min(1).optional(),
+    isAvailable: z.boolean().optional(),
+    status: z.enum(["APPROVED", "PENDING", "REJECTED"]).optional(),
 });
 
 export async function GET(

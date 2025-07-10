@@ -9,7 +9,6 @@ import React from "react";
 import { deleteCarData } from "../services";
 
 const Delete = ({ modal, setModal, data }: ModalProps) => {
-  console.log(data);
   return (
     <Dialog
       open={modal === "delete"}

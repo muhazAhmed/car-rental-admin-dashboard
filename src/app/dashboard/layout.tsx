@@ -1,13 +1,15 @@
 "use client";
 
 import { ReactNode, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Bell, Car, Home, Menu, Search, User2, Users, X } from "lucide-react";
+import { Bell, Car, Home, Menu, User2, Users, X } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/components/LogoutButton";
+import SearchBar from "@/components/ui/SearchBar";
+import { Suspense } from "react";
+import Loader from "@/components/ui/Loader";
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -71,18 +73,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
       <div className="flex-1 flex flex-col">
         <header className="flex justify-between items-center bg-[#EBF0F6] backdrop-blur-md border-b shadow-md px-6 py-3">
-          <div className="ml-12 md:ml-0 relative w-[50%] md:w-[30%] border-2 border-gray-300 shadow-sm rounded-md">
-            <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2"
-              size={16}
-            />
-            <Input
-              type="text"
-              placeholder="Search..."
-              className=" placeholder-gray-400 pl-8"
-            />
-          </div>
-
+          <Suspense fallback={<Loader />}>
+            <SearchBar />
+          </Suspense>
           <div className="flex items-center gap-4">
             <Bell className="cursor-pointer" size={20} />
             <User2

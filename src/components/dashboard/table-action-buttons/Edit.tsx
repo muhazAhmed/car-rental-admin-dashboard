@@ -14,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import CustomButton from "@/components/ui/CustomButton";
 import { UseToast } from "@/lib/helperComponents";
 import { motion } from "framer-motion";
-import { Rotate3d, Save } from "lucide-react";
+import { Rotate3d, Save, Undo } from "lucide-react";
 import Image from "next/image";
 import CustomTooltip from "@/components/ui/CustomTooltip";
 
@@ -34,7 +34,7 @@ export default function Edit({ defaultValues }: { defaultValues: Car }) {
   });
 
   const onInvalid = (errors: FieldErrors<EditCarFormValues>) => {
-    for (const [_, err] of Object.entries(errors)) {
+    for (const [, err] of Object.entries(errors)) {
       if (err?.message) {
         UseToast("Validation Error", err.message.toString(), "error");
       }
@@ -157,17 +157,29 @@ export default function Edit({ defaultValues }: { defaultValues: Car }) {
           </div>
         </div>
 
-        <MotionCustomButton
-          loading={isSubmitting}
-          type="submit"
-          whileTap={{ scale: 0.95 }}
-          whileHover={{ scale: 1.03 }}
-          className="mt-6 w-full font-semibold shadow-md"
-          icon={<Save />}
-          iconPosition="left"
-        >
-          Save Changes
-        </MotionCustomButton>
+        <div className="flex items-center justify-center gap-4">
+          <MotionCustomButton
+            loading={isSubmitting}
+            type="submit"
+            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.03 }}
+            className="mt-6 w-full font-semibold shadow-md"
+            icon={<Save />}
+            iconPosition="left"
+          >
+            Save Changes
+          </MotionCustomButton>
+          <MotionCustomButton
+            whileTap={{ scale: 0.95 }}
+            type="button"
+            variant="outline"
+            icon={<Undo />}
+            className="mt-6 w-full font-semibold shadow-md"
+            onClick={() => router.push("/dashboard")}
+          >
+            Cancel
+          </MotionCustomButton>
+        </div>
       </motion.form>
     </motion.div>
   );
