@@ -27,11 +27,9 @@ export default function CustomButton({
     <Button
       disabled={disabled || loading}
       {...props}
-      className={cn("relative", className)}
+      className={cn("relative", className, disabled && "cursor-not-allowed")}
     >
-      {loading && (
-        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      )}
+      {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
 
       {!loading && icon && iconPosition === "left" && (
         <span className="mr-2">{icon}</span>

@@ -11,6 +11,11 @@ import {
 import Image from "next/image";
 import { statusBodyTemplate } from "@/lib/helperComponents";
 import { ModalProps } from "@/types/props";
+import { motion } from "framer-motion";
+import CustomButton from "@/components/ui/CustomButton";
+import { Check, X } from "lucide-react";
+
+const MotionButton = motion(CustomButton);
 
 const View = ({ modal, setModal, data }: ModalProps) => {
   if (!data) return null;
@@ -49,6 +54,24 @@ const View = ({ modal, setModal, data }: ModalProps) => {
             />
             <div />
           </div>
+        </div>
+        <div className="flex justify-center items-center gap-3 w-full">
+          <MotionButton
+            variant="default"
+            className="w-full"
+            icon={<Check />}
+            disabled={data.status === "APPROVED"}
+          >
+            Approve
+          </MotionButton>
+          <MotionButton
+            variant="destructive"
+            className="w-full"
+            icon={<X />}
+            disabled={data.status === "REJECTED"}
+          >
+            Reject
+          </MotionButton>
         </div>
       </DialogContent>
     </Dialog>
