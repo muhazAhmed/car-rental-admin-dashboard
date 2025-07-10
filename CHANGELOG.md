@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.13](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.12...v0.1.13) (2025-07-10)
+
+
+### Features
+
+* added action buttons for modal ([1aa766c](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/1aa766ccef874082cbcfe34eab3bd865784775ba))
+* added sorting feature ([04c27b2](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/04c27b27be571b565bee786e146619a65da51dcc))
+
 ### [0.1.12](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.11...v0.1.12) (2025-07-09)
 
 ### [0.1.11](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.10...v0.1.11) (2025-07-09)
