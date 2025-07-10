@@ -3,6 +3,11 @@
 A modern and clean **Admin Dashboard** to manage a car rental system — built with **Next.js 15 App Router**, **Tailwind CSS**, **Prisma**, and **ShadCN UI**.  
 The project is fully modular, type-safe, and production ready.
 
+## Scrrenshots
+<img width="1919" height="1079" alt="Screenshot 2025-07-10 170923" src="https://github.com/user-attachments/assets/eb17532a-42b9-46c1-b7ad-6e3a510e362f" />
+<img width="1919" height="1079" alt="Screenshot 2025-07-10 170951" src="https://github.com/user-attachments/assets/df907b46-1dd9-4183-9d48-255e1e222b6d" />
+
+
 > ✅ Admin login | 🔄 CRUD for cars | 📦 Modern UI | 🧪 Validations | 🔐 Local auth
 
 ---
@@ -82,7 +87,7 @@ Create a `.env` file in the root:
 
 ```env
 DATABASE_URL="file:./dev.db"
-NEXT_PUBLIC_SITE_URL="http://localhost:3000"
+API_URL="http://localhost:3000"
 ```
 
 ### 4. Setup Local Database (SQLite)
@@ -136,7 +141,6 @@ npm run dev
 ## 🚧 Future Enhancements
 
 - Role-based user system
-- Pagination & filtering on listings
 - Upload car images (Cloudinary/S3)
 - Global dark mode toggle
 - Export data to CSV
