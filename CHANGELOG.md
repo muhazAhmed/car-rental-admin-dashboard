@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.14](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.13...v0.1.14) (2025-07-10)
+
+
+### Features
+
+* added status filtering ([51f988b](https://github.com/muhazAhmed/car-rental-admin-dashboard/commit/51f988b555aa1d83a1f506f43cab8a2c2798ffff))
+
 ### [0.1.13](https://github.com/muhazAhmed/car-rental-admin-dashboard/compare/v0.1.12...v0.1.13) (2025-07-10)
 
 
