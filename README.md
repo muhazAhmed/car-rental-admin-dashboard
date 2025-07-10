@@ -1,6 +1,6 @@
 # 🚗 Car Rental Admin Dashboard
 
-A modern and clean **Admin Dashboard** to manage a car rental system — built with **Next.js 15 App Router**, **Tailwind CSS**, **Prisma**, and **ShadCN UI**.  
+A modern and clean **Admin Dashboard** to manage a car rental system, built with **Next.js 15 App Router**, **Tailwind CSS**, **Prisma**, and **ShadCN UI**.  
 The project is fully modular, type-safe, and production ready.
 
 ## Scrrenshots
@@ -8,7 +8,7 @@ The project is fully modular, type-safe, and production ready.
 <img width="1919" height="1079" alt="Screenshot 2025-07-10 170951" src="https://github.com/user-attachments/assets/df907b46-1dd9-4183-9d48-255e1e222b6d" />
 
 
-> ✅ Admin login | 🔄 CRUD for cars | 📦 Modern UI | 🧪 Validations | 🔐 Local auth
+> ✅ Admin login | 🔄 CRUD for cars | 📦 Modern UI | 🧪 Validations | 🔐 Local auth | 🌐 filters
 
 ---
 
@@ -36,9 +36,11 @@ The project is fully modular, type-safe, and production ready.
 - 🛠️ **CRUD Support**
   - Server-side routes with Prisma
   - Zod schema validation on updates
+  - Advance filter options
+  - Global search
 - 🌐 **Responsive UI** with modern glassmorphism effect
 - 📊 **Dashboard Cards**
-  - Total cars, available/unavailable counts, pending approvals
+  - Total cars, Pending, Approved and Rejected data
 - ✅ **Type-safe props and APIs**
 - 🧪 **Fully structured for production builds**
 
@@ -151,7 +153,7 @@ npm run dev
 ## 🙋‍♂️ Author
 
 **Muhaz Ahmed**  
-Frontend Engineer | MERN Stack Developer  
+Frontend Engineer | Full Stack Developer  
 🔗 [LinkedIn](https://linkedin.com/in/muhazahmed) •
 
 ---
