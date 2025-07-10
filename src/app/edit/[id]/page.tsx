@@ -25,8 +25,7 @@ export default async function EditCarPage({ params }: Props) {
     if (!car) return notFound();
 
     return (
-      <div className="max-w-4xl mx-auto p-6">
-        <h2 className="text-2xl font-semibold mb-4 text-primary">Edit Car</h2>
+      <div className="flex items-center justify-center relative h-screen w-screen">
         <Edit defaultValues={car} />
       </div>
     );

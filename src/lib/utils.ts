@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge"
 import axios from "axios";
 
 const baseURL = process.env.API_URL ?? "";
+export type SortDirection = "asc" | "desc";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -38,3 +39,26 @@ export const formatDate = (date: Date) =>
     month: "short",
     year: "numeric",
   });
+
+export function SortData<T>(
+  data: T[],
+  key: keyof T,
+  order: "asc" | "desc" = "asc"
+): T[] {
+  return [...data].sort((a, b) => {
+    const aVal = a[key];
+    const bVal = b[key];
+
+    if (typeof aVal === "number" || aVal instanceof Date) {
+      return order === "asc" ? +aVal - +bVal : +bVal - +aVal;
+    }
+
+    if (typeof aVal === "string" && typeof bVal === "string") {
+      return order === "asc"
+        ? aVal.localeCompare(bVal)
+        : bVal.localeCompare(aVal);
+    }
+
+    return 0;
+  });
+}

@@ -10,21 +10,36 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ExternalLink, Filter, Pencil, Trash } from "lucide-react";
+import { ArrowDown, ArrowDown01, Filter } from "lucide-react";
 import CustomTooltip from "../ui/CustomTooltip";
-import { formatDate } from "@/lib/utils";
+import { formatDate, SortData } from "@/lib/utils";
 import { useState } from "react";
-import { fetchCarDetails } from "./services";
+import { actionsButtons } from "./services";
 import Loader from "../ui/Loader";
 import View from "./table-action-buttons/View";
 import { statusBodyTemplate } from "@/lib/helperComponents";
 import CopyToClipboard from "../ui/CopyToClipboard";
 import Delete from "./table-action-buttons/Delete";
+import { SortKey } from "@/types/props";
 
 export default function ListingTable({ cars }: { cars: Car[] }) {
   const [loading, setLoading] = useState<boolean>(false);
   const [modal, setModal] = useState<string>("");
   const [data, setData] = useState<Car | null>(null);
+  const [sortKey, setSortKey] = useState<SortKey | null>(null);
+  const [sortAsc, setSortAsc] = useState(true);
+
+  const handleSort = (key: SortKey) => () => {
+    if (sortKey === key) setSortAsc((prev) => !prev);
+    else {
+      setSortKey(key);
+      setSortAsc(true);
+    }
+  };
+
+  const sortedCars = sortKey
+    ? SortData(cars, sortKey, sortAsc ? "asc" : "desc")
+    : cars;
 
   return (
     <>
@@ -44,16 +59,32 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
               <TableHead>ID</TableHead>
               <TableHead>Make</TableHead>
               <TableHead>Model</TableHead>
-              <TableHead>Year</TableHead>
+              <CustomTooltip content="Sort">
+                <TableHead
+                  className="flex items-center cursor-pointer hover:bg-primary/10"
+                  onClick={handleSort("year")}
+                >
+                  Year
+                  <ArrowDown01 size={15} className="ml-2" />
+                </TableHead>
+              </CustomTooltip>
               <TableHead>Availability</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Created On</TableHead>
+              <CustomTooltip content="Sort">
+                <TableHead
+                  className="flex items-center cursor-pointer hover:bg-primary/10"
+                  onClick={handleSort("createdAt")}
+                >
+                  Created On
+                  <ArrowDown01 size={15} className="ml-2" />
+                </TableHead>
+              </CustomTooltip>
               <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {cars.length > 0 ? (
-              cars.map((item) => (
+            {sortedCars.length > 0 ? (
+              sortedCars.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <CopyToClipboard value={item.id}>
@@ -73,44 +104,40 @@ export default function ListingTable({ cars }: { cars: Car[] }) {
                   <TableCell>{statusBodyTemplate(item.status)}</TableCell>
                   <TableCell>{formatDate(item?.createdAt)}</TableCell>
                   <TableCell className="flex items-center gap-4">
-                    <CustomTooltip content="View" className="bg-primary">
-                      <ExternalLink
-                        size={18}
-                        className="text-primary cursor-pointer"
-                        onClick={() =>
-                          fetchCarDetails({
-                            id: item.id,
-                            setModal,
-                            modalName: "view",
-                            setLoading,
-                            setData,
-                          })
-                        }
-                      />
-                    </CustomTooltip>
-                    <CustomTooltip content="Edit" className="bg-blue-500">
-                      <a href={`/edit/${item.id}`}>
-                        <Pencil
-                          size={18}
-                          className="text-blue-500 cursor-pointer"
-                        />
-                      </a>
-                    </CustomTooltip>
-                    <CustomTooltip content="Delete" className="bg-red-500">
-                      <Trash
-                        size={18}
-                        className="text-red-500 cursor-pointer"
-                        onClick={() =>
-                          fetchCarDetails({
-                            id: item.id,
-                            setModal,
-                            modalName: "delete",
-                            setLoading,
-                            setData,
-                          })
-                        }
-                      />
-                    </CustomTooltip>
+                    {actionsButtons({
+                      item,
+                      setModal,
+                      setLoading,
+                      setData,
+                    }).map(
+                      ({
+                        label,
+                        icon: Icon,
+                        bg,
+                        className,
+                        onClick,
+                        href,
+                        as,
+                      }) => (
+                        <CustomTooltip
+                          key={label}
+                          content={label}
+                          className={bg}
+                        >
+                          {as === "link" ? (
+                            <a href={href}>
+                              <Icon size={18} className={className} />
+                            </a>
+                          ) : (
+                            <Icon
+                              size={18}
+                              onClick={onClick}
+                              className={className}
+                            />
+                          )}
+                        </CustomTooltip>
+                      )
+                    )}
                   </TableCell>
                 </TableRow>
               ))

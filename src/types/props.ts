@@ -1,5 +1,7 @@
 import { Status } from "@prisma/client";
 
+export type SortKey = "year" | "status" | "createdAt";
+
 export interface Car {
     id: string;
     make: string;
