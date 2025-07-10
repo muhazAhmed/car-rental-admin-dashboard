@@ -9,6 +9,9 @@ export async function GET(req: NextRequest) {
         const search = searchParams.get("search") || "";
         const rawStatus = searchParams.get("status");
         const status = rawStatus && rawStatus !== "undefined" ? rawStatus : undefined;
+        const year = parseInt(search);
+        const isValidYear = !isNaN(year);
+
 
         const skip = (page - 1) * limit;
 
@@ -17,7 +20,7 @@ export async function GET(req: NextRequest) {
                 OR: [
                     { make: { contains: search } },
                     { model: { contains: search } },
-                    { year: { equals: parseInt(search) } },
+                    ...(isValidYear ? [{ year: { equals: year } }] : []),
                 ],
             }),
             ...(status && status !== "ALL" && { status }),
